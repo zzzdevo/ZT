@@ -4,7 +4,8 @@ import string
 from pyrogram import filters
 from pyrogram.types import InlineKeyboardMarkup, InputMediaPhoto, Message
 from pytgcalls.exceptions import NoActiveGroupCall
-
+from strings.filters import command
+from config import SUPPORT_CHANNEL
 import config
 from AnonXMusic import Apple, Resso, SoundCloud, Spotify, Telegram, YouTube, app
 from AnonXMusic.core.call import Anony
@@ -26,7 +27,7 @@ from config import BANNED_USERS, lyrical
 
 
 @app.on_message(
-    filters.command(
+     command(
         [
             "play",
             "vplay",
@@ -36,9 +37,22 @@ from config import BANNED_USERS, lyrical
             "vplayforce",
             "cplayforce",
             "cvplayforce",
+            "/play",
+            "/vplay", 
+            "cplay", 
+            "g", 
+            "پلەی", 
+            "video",
+            "پ کەناڵ",
+            "gorani",
+            "ڤیدیو",
+            "سوڕەتی",
+            "سورەتی",
+            "سورەت",
+            "سوڕەت",
         ]
     )
-    & filters.group
+    & ~filters.private
     & ~BANNED_USERS
 )
 @PlayWrapper
@@ -60,8 +74,8 @@ async def play_commnd(
     slider = None
     plist_type = None
     spotify = None
-    user_id = message.from_user.id
-    user_name = message.from_user.first_name
+    user_id = message.from_user.id if message.from_user else "833360381"
+    user_name = message.from_user.first_name if message.from_user else "None"
     audio_telegram = (
         (message.reply_to_message.audio or message.reply_to_message.voice)
         if message.reply_to_message
