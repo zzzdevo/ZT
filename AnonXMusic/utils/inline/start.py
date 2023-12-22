@@ -37,7 +37,7 @@ def private_panel(_):
         ],
         [
             InlineKeyboardButton(
-                text="« زیادم بکە بۆ کەناڵەکەت »",
+                text=_["S_B_1"],
                 url=f"https://t.me/{app.username}?startchannel=true"),
         ],
     ]
